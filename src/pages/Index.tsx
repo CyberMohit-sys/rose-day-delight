@@ -2,11 +2,12 @@ import React, { useState, useRef, useCallback } from 'react';
 import FloatingPetals from '@/components/FloatingPetals';
 import RoseDayCard from '@/components/RoseDayCard';
 import LoveMessage from '@/components/LoveMessage';
+import AcceptRose from '@/components/AcceptRose';
 import PickARose from '@/components/PickARose';
 import FinalMessage from '@/components/FinalMessage';
 import { Volume2, VolumeX } from 'lucide-react';
 
-type Screen = 'greeting' | 'love' | 'pick' | 'final';
+type Screen = 'greeting' | 'love' | 'accept' | 'pick' | 'final';
 
 const Index: React.FC = () => {
   const [screen, setScreen] = useState<Screen>('greeting');
@@ -78,7 +79,8 @@ const Index: React.FC = () => {
         }}
       >
         {screen === 'greeting' && <RoseDayCard onNext={handleGreetingNext} />}
-        {screen === 'love' && <LoveMessage onNext={() => goTo('pick')} />}
+        {screen === 'love' && <LoveMessage onNext={() => goTo('accept')} />}
+        {screen === 'accept' && <AcceptRose onNext={() => goTo('pick')} />}
         {screen === 'pick' && <PickARose onNext={() => goTo('final')} />}
         {screen === 'final' && <FinalMessage />}
       </div>
