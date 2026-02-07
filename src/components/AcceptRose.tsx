@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import sajidaImg from '@/assets/sajida.jpg';
+import HeartBurst from '@/components/HeartBurst';
 
 interface AcceptRoseProps {
   onNext: () => void;
@@ -7,16 +8,19 @@ interface AcceptRoseProps {
 
 const AcceptRose: React.FC<AcceptRoseProps> = ({ onNext }) => {
   const [roseState, setRoseState] = useState<'offering' | 'moving' | 'accepted'>('offering');
+  const [burstActive, setBurstActive] = useState(false);
 
   const handleAccept = () => {
     setRoseState('moving');
     setTimeout(() => {
       setRoseState('accepted');
+      setBurstActive(true);
     }, 1200);
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-6 relative z-10">
+      <HeartBurst active={burstActive} count={45} />
       <div className="romantic-card text-center animate-fade-in-scale max-w-sm relative overflow-visible">
         {/* Sajida's Photo */}
         <div className="mb-5 relative inline-block">
